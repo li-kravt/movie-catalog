@@ -3,7 +3,7 @@ type ButtonProps = {
   children: React.ReactNode;
 }
 
-export const Button = ({className, children}: ButtonProps) => {
+export const Button = ({className="button", children}: ButtonProps) => {
 
   return (
     <button className={className}>

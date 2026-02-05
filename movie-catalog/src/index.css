@@ -1,6 +1,33 @@
 :root {
   font-weight: 400;
+  font-family: 'Roboto', sans-serif;
 
   color: rgb(255, 255, 255);
   background-color: #202020;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.button {
+  padding-inline: 1rem;
+  font-size: 14px;
+  line-height: 2.25rem;
+  text-transform: uppercase;
+  color: #fff;
 }
