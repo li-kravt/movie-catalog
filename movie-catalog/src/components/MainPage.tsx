@@ -6,8 +6,8 @@ export const MainPage = () => {
     <>
     <h2> All films</h2>
     <div>
-      <button children="genre"></button>
-      <button children="SORT BY IMDB"></button>
+      <button className="button">genre</button>
+      <button className="button">SORT BY IMDB</button>
       <p>Movie Cards</p>
       <Pagination />
     </div>
