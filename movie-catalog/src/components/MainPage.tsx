@@ -3,7 +3,12 @@ import { Pagination } from "./Pagination"
 import { MovieCard } from "./MovieCard";
 
 interface Movie {
-  title: string;
+  id: number,
+  poster_path: string,
+  title: string,
+  genre_ids: Array<string>,
+  vote_average: number,
+  overview: string,
   // Add other properties you need from the API response
 }
 // string[]
@@ -37,7 +42,16 @@ export const MainPage = () => {
     <div>
       <button className="button">genre</button>
       <button className="button">SORT BY IMDB</button>
-      < MovieCard />
+      {popularFilms.map((film) => 
+      <MovieCard
+      key={film.id}
+      poster_path={film.poster_path} 
+      title={film.title}
+      genre_ids={film.genre_ids}
+      vote_average={film.vote_average}
+      overview={film.overview}
+      />)}
+      
       <Pagination />
     </div>
     </>
