@@ -29,11 +29,10 @@ export const MainPage = () => {
       .catch(err => console.error(err));
   }, [])
 
-  popularFilms.length > 0 ? console.log(popularFilms.map(i => i.title)) : console.log("f")
+  console.log(popularFilms)
 
   return (
     <>
-
     <h2> All films</h2>
     <div>
       <button className="button">genre</button>
