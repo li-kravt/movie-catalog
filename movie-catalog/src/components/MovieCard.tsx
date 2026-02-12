@@ -1,21 +1,27 @@
+type MovieCardProps = {
+  poster_path: string,
+  title: string,
+  genre_ids: Array<string>,
+  vote_average: number,
+  overview: string,
+}
 
-
-export const MovieCard = () => {
+export const MovieCard = ({poster_path, title, genre_ids, vote_average, overview}: MovieCardProps) => {
 
   return (
     <div>
-      <img src="" alt="cover" />
+      <img src={poster_path} alt="poster" />
       <div>
-        <h3>Title</h3>
+        <h3>{title}</h3>
         <div>
-          Genres(map)
+          {genre_ids}
         </div>
         <div>
           <img src="" alt="IMDb"></img>
-          <p>9.8 score</p>
+          <p>{vote_average}</p>
            <img src="" alt="star"></img>
         </div>
-        <p>description.....</p>
+        <p>{overview}</p>
         <div>
           <button>View details</button>
           <button>Add to watchlist</button>
