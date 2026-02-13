@@ -4,7 +4,8 @@ import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { MainPage } from './components/MainPage'
 
-interface Genre {
+
+export interface Genre {
   id: number,
   name: string,
 }
@@ -25,7 +26,7 @@ function App() {
   useEffect(()=> {
     fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options)
   .then(res => res.json())
-  .then(res => console.log(setGenres(res.genres)))
+  .then(res => setGenres(res.genres))
   .catch(err => console.error(err));
   }, [])
 
@@ -35,7 +36,7 @@ function App() {
   return (
     <>
      <Header className='header'/>
-     <MainPage />
+     <MainPage genres={genres} />
      <Footer />
     </>
   )

@@ -1,26 +1,10 @@
 type MovieCardProps = {
   poster_path: string,
   title: string,
-  genre_ids: Array<string>,
+  genre_ids: number[],
   vote_average: number,
   overview: string,
 }
-
-const TOKEN = import.meta.env.VITE_API_TOKEN
-
-const options = {
-  method: 'GET',
-  headers: {
-    accept: 'application/json',
-    Authorization: `Bearer ${TOKEN}`
-  }
-};
-
-fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options)
-  .then(res => res.json())
-  .then(res => console.log("genre", res))
-  .catch(err => console.error(err));
-
 
 export const MovieCard = ({poster_path, title, genre_ids, vote_average, overview}: MovieCardProps) => {
 
@@ -30,7 +14,9 @@ export const MovieCard = ({poster_path, title, genre_ids, vote_average, overview
       <div>
         <h3>{title}</h3>
         <div>
-          {genre_ids}
+          {genre_ids.forEach(element => {
+            element
+          });}
         </div>
         <div>
           <img src="{}" alt="IMDb"></img>

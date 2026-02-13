@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
 import { Pagination } from "./Pagination"
 import { MovieCard } from "./MovieCard";
+import type { Genre } from "../App";
+
+interface MainPageProps {
+  genres: Genre[]
+}
 
 interface Movie {
   id: number,
   poster_path: string,
   title: string,
-  genre_ids: Array<string>,
+  genre_ids: number[],
   vote_average: number,
   overview: string,
   // Add other properties you need from the API response
 }
-// string[]
-// Array<string>
 
 const TOKEN = import.meta.env.VITE_API_TOKEN
 
@@ -24,7 +27,7 @@ const options = {
   }
 };
 
-export const MainPage = () => {  
+export const MainPage = ({genres}: MainPageProps) => {  
   const [popularFilms, setPopularFilms] = useState<Movie[]>([])
 
   useEffect(() => {
