@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Pagination } from "./Pagination";
 import { MovieCard } from "./MovieCard";
-import type { Genre } from "../App";
 
 interface MainPageProps {
   genres: Record<string, string>;
@@ -43,11 +42,13 @@ export const MainPage = ({ genres }: MainPageProps) => {
   console.log(popularFilms);
 
   return (
-    <>
+    <div className="main-page">
       <h2> All films</h2>
-      <div>
-        <button className="button">genre</button>
-        <button className="button">SORT BY IMDB</button>
+      <div className="buttons">
+        <button className="button--border-unfull">GENRE</button>
+        <button className="button--border-unfull">SORT BY IMDB</button>
+      </div>
+      <div className="movie-list">
         {popularFilms.map((film) => (
           <MovieCard
             key={film.id}
@@ -59,9 +60,8 @@ export const MainPage = ({ genres }: MainPageProps) => {
             genres={genres}
           />
         ))}
-
-        <Pagination />
       </div>
-    </>
+      <Pagination />
+    </div>
   );
 };

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../index.css";
 
 type MovieCardProps = {
   poster_path: string;
@@ -23,24 +24,36 @@ export const MovieCard = ({
     const movieGenre: string[] = genre_ids.map(
       (genreID) => (genres ?? [])[genreID],
     );
+    console.log("useEffect");
     setGenre(movieGenre);
   }, [genres]);
 
+  console.log("useEffect");
+
   return (
-    <div>
+    <div className="movie-card">
+      {/* //TODO Добавить постер api */}
       <img src={poster_path} alt="poster" />
-      <div>
+      <div className="info">
         <h3>{title}</h3>
-        <div>{genre}</div>
-        <div>
-          <img src="{}" alt="IMDb"></img>
-          <p>{vote_average}</p>
-          <img src="{}" alt="star"></img>
+        <div className="genres-div">
+          {genre.map((item: string) => (
+            <div className="genre" key={item}>
+              {item}
+            </div>
+          ))}
         </div>
-        <p>{overview}</p>
-        <div>
-          <button>View details</button>
-          <button>Add to watchlist</button>
+        <div className="rating">
+          <img src="/img/IMDB_Logo_2016.svg" alt="IMDb"></img>
+          <div className="text-description">
+            <p>{vote_average}</p>
+            <img src="/img/star-icon.svg" alt="star"></img>
+          </div>
+        </div>
+        <p className="text-description">{overview}</p>
+        <div className="buttons">
+          <button className="button--border-full">View details</button>
+          <button className="button--border-unfull">Add to watchlist</button>
         </div>
       </div>
     </div>
