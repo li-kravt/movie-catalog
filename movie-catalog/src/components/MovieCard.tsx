@@ -33,7 +33,10 @@ export const MovieCard = ({
   return (
     <div className="movie-card">
       {/* //TODO Добавить постер api */}
-      <img src={poster_path} alt="poster" />
+      <img
+        src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
+        alt="poster"
+      />
       <div className="info">
         <h3>{title}</h3>
         <div className="genres-div">
