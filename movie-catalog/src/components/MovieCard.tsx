@@ -1,27 +1,41 @@
-type MovieCardProps = {
-  poster_path: string,
-  title: string,
-  genre_ids: number[],
-  vote_average: number,
-  overview: string,
-}
+import { useEffect, useState } from "react";
 
-export const MovieCard = ({poster_path, title, genre_ids, vote_average, overview}: MovieCardProps) => {
+type MovieCardProps = {
+  poster_path: string;
+  title: string;
+  genre_ids: number[];
+  vote_average: number;
+  overview: string;
+  genres: Record<string, string>;
+};
+
+export const MovieCard = ({
+  poster_path,
+  title,
+  genre_ids,
+  vote_average,
+  overview,
+  genres,
+}: MovieCardProps) => {
+  const [genre, setGenre] = useState<string[]>([]);
+
+  useEffect(() => {
+    const movieGenre: string[] = genre_ids.map(
+      (genreID) => (genres ?? [])[genreID],
+    );
+    setGenre(movieGenre);
+  }, [genres]);
 
   return (
     <div>
       <img src={poster_path} alt="poster" />
       <div>
         <h3>{title}</h3>
-        <div>
-          {genre_ids.forEach(element => {
-            element
-          });}
-        </div>
+        <div>{genre}</div>
         <div>
           <img src="{}" alt="IMDb"></img>
           <p>{vote_average}</p>
-           <img src="{}" alt="star"></img>
+          <img src="{}" alt="star"></img>
         </div>
         <p>{overview}</p>
         <div>
@@ -30,5 +44,5 @@ export const MovieCard = ({poster_path, title, genre_ids, vote_average, overview
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
