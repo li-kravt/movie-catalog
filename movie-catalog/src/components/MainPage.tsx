@@ -28,6 +28,7 @@ const options = {
 
 export const MainPage = ({ genres }: MainPageProps) => {
   const [popularFilms, setPopularFilms] = useState<Movie[]>([]);
+  const [page, setPage] = useState<string>("1");
 
   useEffect(() => {
     fetch(
