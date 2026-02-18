@@ -28,17 +28,24 @@ const options = {
 
 export const MainPage = ({ genres }: MainPageProps) => {
   const [popularFilms, setPopularFilms] = useState<Movie[]>([]);
-  const [page, setPage] = useState<string>("1");
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<Number>(5);
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1`,
+      `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`,
       options,
     )
       .then((res) => res.json())
-      .then((res) => setPopularFilms(res.results))
+      .then((res) => {
+        setPopularFilms(res.results);
+        setTotalPages(res.total_pages);
+        console.log(res);
+        console.log("totalPages", res.total_pages);
+      })
       .catch((err) => console.error(err));
   }, []);
+  console.log("totPages", totalPages);
 
   console.log(popularFilms);
 
@@ -62,7 +69,7 @@ export const MainPage = ({ genres }: MainPageProps) => {
           />
         ))}
       </div>
-      <Pagination />
+      <Pagination totalPages={totalPages} />
     </div>
   );
 };

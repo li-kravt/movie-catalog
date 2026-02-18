@@ -1,6 +1,13 @@
 import { useEffect } from "react";
+interface PaginationProps {
+  totalPages: number;
+}
 
-export const Pagination = () => {
+export const Pagination = ({ totalPages }: PaginationProps) => {
+  const limit: number = 20;
+  const pagesCount: number = Math.ceil(totalPages / limit);
+  console.log("pagesCount", pagesCount);
+
   const TOKEN = import.meta.env.VITE_API_TOKEN;
 
   const options = {
@@ -20,7 +27,7 @@ export const Pagination = () => {
 
   return (
     <>
-      <p>Pagination</p>
+      <p>1</p>
     </>
   );
 };
