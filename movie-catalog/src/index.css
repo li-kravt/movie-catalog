@@ -151,3 +151,21 @@ gap: 0.5rem
   font-size: 1rem;
   font-weight: 400;
 }
+
+.div-pagination {
+  display: flex;
+  gap: 1rem;
+}
+
+.button-pagination {
+  width: 2rem;
+  height: 2rem;
+  background-color: #fff;
+  color: #202020;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button-pagination:hover {
+  background-color: #BDBDBD;
+}

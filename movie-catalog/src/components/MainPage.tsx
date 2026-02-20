@@ -29,7 +29,7 @@ const options = {
 export const MainPage = ({ genres }: MainPageProps) => {
   const [popularFilms, setPopularFilms] = useState<Movie[]>([]);
   const [page, setPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<Number>(5);
+  const [totalPages, setTotalPages] = useState<number>(0);
 
   useEffect(() => {
     fetch(
@@ -45,6 +45,7 @@ export const MainPage = ({ genres }: MainPageProps) => {
       })
       .catch((err) => console.error(err));
   }, []);
+
   console.log("totPages", totalPages);
 
   console.log(popularFilms);
@@ -69,7 +70,7 @@ export const MainPage = ({ genres }: MainPageProps) => {
           />
         ))}
       </div>
-      <Pagination totalPages={totalPages} />
+      <Pagination />
     </div>
   );
 };
