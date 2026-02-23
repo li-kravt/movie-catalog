@@ -23,6 +23,13 @@ export const Pagination = ({ setPage, page }: PaginationProps) => {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [page]);
+
   return (
     <div className="div-pagination">
       {Array.from({ length: 10 }).map((_, index) => {
