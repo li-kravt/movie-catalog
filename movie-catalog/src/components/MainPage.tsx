@@ -44,7 +44,7 @@ export const MainPage = ({ genres }: MainPageProps) => {
         console.log("totalPages", res.total_pages);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [page]);
 
   console.log("totPages", totalPages);
 
@@ -70,7 +70,7 @@ export const MainPage = ({ genres }: MainPageProps) => {
           />
         ))}
       </div>
-      <Pagination />
+      <Pagination setPage={setPage} page={page} totalPages={totalPages} />
     </div>
   );
 };

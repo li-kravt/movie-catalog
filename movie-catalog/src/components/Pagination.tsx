@@ -1,9 +1,11 @@
 import { useEffect } from "react";
-// interface PaginationProps {
-//   totalPages: number;
-// }
+interface PaginationProps {
+  setPage: (page: number) => void;
+  page: number;
+  totalPages: number;
+}
 
-export const Pagination = () => {
+export const Pagination = ({ setPage, page }: PaginationProps) => {
   const TOKEN = import.meta.env.VITE_API_TOKEN;
 
   const options = {
@@ -21,15 +23,22 @@ export const Pagination = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const SELECTED_PAGE = 1;
-
   return (
     <div className="div-pagination">
-      {Array.from({ length: 10 })
-        .slice(0 + SELECTED_PAGE, 10 + SELECTED_PAGE)
-        .map((_, index) => {
-          return <button className="button-pagination">{index + 1}</button>;
-        })}
+      {Array.from({ length: 10 }).map((_, index) => {
+        const pageIndex: number = index + 1;
+        const isActive = pageIndex === page;
+        return (
+          <button
+            key={index}
+            onClick={() => setPage(pageIndex)}
+            className="button-pagination"
+            disabled={isActive}
+          >
+            {pageIndex}
+          </button>
+        );
+      })}
     </div>
   );
 };
