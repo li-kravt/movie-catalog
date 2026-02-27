@@ -3,6 +3,7 @@ import "./App.css";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { MainPage } from "./components/MainPage";
+import { Route, Routes } from "react-router";
 
 export interface Genre {
   id: number;
@@ -47,9 +48,10 @@ function App() {
   return (
     <>
       <Header className="header" />
-      {/* TODO: Переделать все жанры на объект в других файлах */}
-      <MainPage genres={genres} />
-      {/* <MainPage genres={genres} /> */}
+      <Routes>
+        <Route index element={<MainPage genres={genres} />} />
+        <Route path="watchlist" element={<WatchList />}
+      </Routes>
       <Footer />
     </>
   );

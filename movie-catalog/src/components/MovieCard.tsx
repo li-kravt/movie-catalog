@@ -34,6 +34,13 @@ export const MovieCard = ({
     <div className="movie-card">
       {/* //TODO Добавить постер api */}
       <img
+        style={{
+          display: "flex",
+          width: "200px",
+          height: "300px",
+          minWidth: "200px",
+          objectFit: "cover",
+        }}
         src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
         alt="poster"
       />
