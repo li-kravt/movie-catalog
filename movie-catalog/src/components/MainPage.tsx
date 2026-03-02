@@ -53,7 +53,7 @@ export const MainPage = ({ genres }: MainPageProps) => {
 
   return (
     <div className="main-page">
-      <h2> All films</h2>
+      <h2>Popular</h2>
       <Outlet />
       <div className="buttons">
         <button className="button--border-unfull">GENRE</button>

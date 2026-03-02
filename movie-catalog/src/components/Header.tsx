@@ -1,3 +1,5 @@
+import { Route, Link } from "react-router";
+
 type HeaderProps = {
   className?: string;
   children?: React.ReactNode;
@@ -12,7 +14,11 @@ export const Header = ({ className }: HeaderProps) => {
       </div>
       <div className="buttons-header">
         <button className="button" children="ALL FILMS"></button>
-        <button className="button" children="MY WATCHLISTS"></button>
+        <Link
+          to="/watchlist"
+          className="button"
+          children="MY WATCHLISTS"
+        ></Link>
         <button className="button button--accent" children="LOGIN"></button>
       </div>
     </div>
