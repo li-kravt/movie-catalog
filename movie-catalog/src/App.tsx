@@ -4,6 +4,7 @@ import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { MainPage } from "./components/MainPage";
 import { Route, Routes } from "react-router";
+import { WatchList } from "./pages/WatchList";
 
 export interface Genre {
   id: number;
@@ -50,7 +51,7 @@ function App() {
       <Header className="header" />
       <Routes>
         <Route index element={<MainPage genres={genres} />} />
-        <Route path="watchlist" element={<WatchList />}
+        <Route path="watchlist" element={<WatchList />} />
       </Routes>
       <Footer />
     </>

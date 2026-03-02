@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Pagination } from "./Pagination";
 import { MovieCard } from "./MovieCard";
+import { Outlet } from "react-router";
 
 interface MainPageProps {
   genres: Record<string, string>;
@@ -53,6 +54,7 @@ export const MainPage = ({ genres }: MainPageProps) => {
   return (
     <div className="main-page">
       <h2> All films</h2>
+      <Outlet />
       <div className="buttons">
         <button className="button--border-unfull">GENRE</button>
         <button className="button--border-unfull">SORT BY IMDB</button>
