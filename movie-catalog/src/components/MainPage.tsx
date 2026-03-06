@@ -62,6 +62,7 @@ export const MainPage = ({ genres }: MainPageProps) => {
       <div className="movie-list">
         {popularFilms.map((film) => (
           <MovieCard
+            id={film.id}
             key={film.id}
             poster_path={film.poster_path}
             title={film.title}

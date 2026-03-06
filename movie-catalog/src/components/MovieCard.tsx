@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { Route, Link } from "react-router";
 import "../index.css";
 
 type MovieCardProps = {
+  id: number;
   poster_path: string;
   title: string;
   genre_ids: number[];
@@ -11,6 +13,7 @@ type MovieCardProps = {
 };
 
 export const MovieCard = ({
+  id,
   poster_path,
   title,
   genre_ids,
@@ -32,7 +35,6 @@ export const MovieCard = ({
 
   return (
     <div className="movie-card">
-      {/* //TODO Добавить постер api */}
       <img
         style={{
           display: "flex",
@@ -62,7 +64,9 @@ export const MovieCard = ({
         </div>
         <p className="text-description">{overview}</p>
         <div className="buttons">
-          <button className="button--border-full">View details</button>
+          <Link to={`${id}`} className="button--border-full">
+            View details
+          </Link>
           <button className="button--border-unfull">Add to watchlist</button>
         </div>
       </div>

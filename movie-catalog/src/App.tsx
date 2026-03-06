@@ -6,6 +6,7 @@ import { MainPage } from "./components/MainPage";
 import { Route, Routes } from "react-router";
 import { WatchList } from "./pages/WatchList";
 import { AllFilms } from "./pages/AllFilms";
+import { FilmDetails } from "./components/FilmDetails";
 
 export interface Genre {
   id: number;
@@ -52,6 +53,7 @@ function App() {
       <Header className="header" />
       <Routes>
         <Route index element={<MainPage genres={genres} />} />
+        <Route path=":id" element={<FilmDetails />} />
         <Route path="watchlist" element={<WatchList />} />
         <Route path="allfilms" element={<AllFilms />} />
       </Routes>
