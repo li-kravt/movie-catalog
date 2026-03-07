@@ -7,9 +7,9 @@ import App from "./App.tsx";
 const root = document.getElementById("root")!;
 
 ReactDOM.createRoot(root).render(
-  <BrowserRouter>
-    <StrictMode>
+  <StrictMode>
+    <BrowserRouter>
       <App />
-    </StrictMode>
-  </BrowserRouter>,
+    </BrowserRouter>
+  </StrictMode>,
 );

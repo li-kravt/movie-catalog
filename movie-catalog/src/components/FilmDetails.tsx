@@ -9,13 +9,16 @@ interface FilmDetailsData {
   title: string;
   budget: number;
   genres: Genre[];
-  homepage: string;
+  homepage?: string;
   id: number;
   overview: string;
+  origin_country: [];
+  original_language: string;
   poster_path?: string;
   production_companies?: {};
   production_countries?: {};
   release_date?: string;
+  runtime: number;
   status?: string;
   video?: boolean;
   vote_average: number;
@@ -48,9 +51,15 @@ export const FilmDetails = () => {
           budget: res.budget,
           genres: res.genres,
           homepage: res.homepage,
-          poster_path: res.poster_path,
           id: res.id,
+          poster_path: res.poster_path,
+          production_companies: res.production_companies,
+          production_countries: res.production_countries,
+          release_date: res.release_date,
+          runtime: res.runtime,
           overview: res.overview,
+          origin_country: res.origin_country,
+          original_language: res.original_language,
           vote_average: res.vote_average,
         };
         setFilmDetailsData(filmDetails);

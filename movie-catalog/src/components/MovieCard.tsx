@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Route, Link } from "react-router";
+import { Link } from "react-router";
 import "../index.css";
 
 type MovieCardProps = {
