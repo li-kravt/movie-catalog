@@ -17,7 +17,7 @@ interface FilmDetailsData {
   poster_path?: string;
   production_companies: { name: string }[];
   production_countries: { name: string }[];
-  release_date: { name: string }[];
+  release_date: string;
   runtime: number;
   status?: string;
   video?: boolean;
