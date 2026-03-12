@@ -1,4 +1,4 @@
-import { Route, Link } from "react-router";
+import { Link } from "react-router";
 
 type HeaderProps = {
   className?: string;

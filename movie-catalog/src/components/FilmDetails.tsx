@@ -15,9 +15,9 @@ interface FilmDetailsData {
   origin_country: [];
   original_language: string;
   poster_path?: string;
-  production_companies?: {};
-  production_countries?: {};
-  release_date?: string;
+  production_companies: { name: string }[];
+  production_countries: { name: string }[];
+  release_date: { name: string }[];
   runtime: number;
   status?: string;
   video?: boolean;
@@ -38,6 +38,7 @@ export const FilmDetails = () => {
   const [filmDetailsData, setFilmDetailsData] =
     useState<FilmDetailsData | null>(null);
   const { id } = useParams();
+  const [prodCountries, setProdCountries] = useState<string[]>();
 
   useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
@@ -68,6 +69,15 @@ export const FilmDetails = () => {
   }, [id]);
   console.log("filmDetailsData", filmDetailsData);
 
+  useEffect(() => {
+    setProdCountries(
+      filmDetailsData?.production_countries.map((obj) => {
+        return obj.name;
+      }),
+    );
+    console.log("useEff", prodCountries);
+  }, [filmDetailsData]);
+
   return (
     <>
       {filmDetailsData ? (
@@ -82,13 +92,21 @@ export const FilmDetails = () => {
         >
           <div className="info">
             <h3>{filmDetailsData.title}</h3>
-            {filmDetailsData.adult && <p>18+</p>}
-            <div className="genres-div">
-              {filmDetailsData.genres.map((item, index: number) => (
-                <div className="genre" key={index}>
-                  {item.name}
-                </div>
-              ))}
+            <div>
+              <div>
+                {filmDetailsData.release_date && (
+                  <div>Release: {filmDetailsData.release_date}</div>
+                )}
+                <p>{filmDetailsData.runtime} min</p>
+              </div>
+              <div className="genres-div">
+                {filmDetailsData.genres.map((item, index: number) => (
+                  <div className="genre" key={index}>
+                    {item.name}
+                  </div>
+                ))}
+                {filmDetailsData.adult && <p>18+</p>}
+              </div>
             </div>
             <div className="rating">
               <img src="/img/IMDB_Logo_2016.svg" alt="IMDb"></img>
@@ -98,6 +116,33 @@ export const FilmDetails = () => {
               </div>
             </div>
             <p className="text-description">{filmDetailsData.overview}</p>
+            <div>
+              <h3>More details</h3>
+              <div>
+                <div>
+                  <p>Origin country:</p>
+                  {filmDetailsData.origin_country.join(", ")}
+                </div>
+                <div>
+                  <p>Original language:</p>
+                  {filmDetailsData.original_language}
+                </div>
+                <div>
+                  <p>Production companies:</p>
+                  {filmDetailsData.production_companies
+                    .reduce<string[]>((acc, cur) => {
+                      acc.push(cur.name);
+                      return acc;
+                    }, [])
+                    .join(", ")}
+                  {/* тут можно использовать map? */}
+                </div>
+                <div>
+                  <p>Production country:</p>
+                  {prodCountries?.join(", ")}
+                </div>
+              </div>
+            </div>
             <div className="buttons">
               <button className="button--border-unfull">
                 Add to watchlist
