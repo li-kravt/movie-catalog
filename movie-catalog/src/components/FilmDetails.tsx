@@ -38,8 +38,8 @@ export const FilmDetails = () => {
   const [filmDetailsData, setFilmDetailsData] =
     useState<FilmDetailsData | null>(null);
   const { id } = useParams();
-  const [prodCountries, setProdCountries] = useState<string[]>();
 
+  // да?
   useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
       .then((res) => res.json())
@@ -68,15 +68,6 @@ export const FilmDetails = () => {
       .catch((err) => console.error(err));
   }, [id]);
   console.log("filmDetailsData", filmDetailsData);
-
-  useEffect(() => {
-    setProdCountries(
-      filmDetailsData?.production_countries.map((obj) => {
-        return obj.name;
-      }),
-    );
-    console.log("useEff", prodCountries);
-  }, [filmDetailsData]);
 
   return (
     <>
@@ -129,17 +120,12 @@ export const FilmDetails = () => {
                 </div>
                 <div>
                   <p>Production companies:</p>
-                  {filmDetailsData.production_companies
-                    .reduce<string[]>((acc, cur) => {
-                      acc.push(cur.name);
-                      return acc;
-                    }, [])
-                    .join(", ")}
+                  {filmDetailsData?.production_companies.map((obj) => obj.name)}
                   {/* тут можно использовать map? */}
                 </div>
                 <div>
                   <p>Production country:</p>
-                  {prodCountries?.join(", ")}
+                  {filmDetailsData?.production_countries.map((obj) => obj.name)}
                 </div>
               </div>
             </div>
