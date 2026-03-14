@@ -26,6 +26,27 @@ const options = {
 function App() {
   const [genres, setGenres] = useState({});
 
+  const hasSessionId = () => {
+    for (const oneCookie of document.cookie.split("; ")) {
+      oneCookie.split("=")[1] === "guest_session_id" ? true : false;
+    }
+  };
+
+  !hasSessionId &&
+    useEffect(() => {
+      fetch(
+        "https://api.themoviedb.org/3/authentication/guest_session/new",
+        options,
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          document.cookie = `guest_session_id = ${res.guest_session_id}; max-age=3600"`;
+          console.log("Cookie:", document.cookie);
+        })
+        .catch((err) => console.error(err));
+    }, []);
+
   useEffect(() => {
     fetch("https://api.themoviedb.org/3/genre/movie/list?language=en", options)
       // as - Type Assertion

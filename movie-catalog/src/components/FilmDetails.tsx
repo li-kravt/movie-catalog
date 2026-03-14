@@ -39,7 +39,6 @@ export const FilmDetails = () => {
     useState<FilmDetailsData | null>(null);
   const { id } = useParams();
 
-  // да?
   useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
       .then((res) => res.json())
@@ -121,7 +120,6 @@ export const FilmDetails = () => {
                 <div>
                   <p>Production companies:</p>
                   {filmDetailsData?.production_companies.map((obj) => obj.name)}
-                  {/* тут можно использовать map? */}
                 </div>
                 <div>
                   <p>Production country:</p>
