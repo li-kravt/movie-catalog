@@ -1,4 +1,10 @@
-import { useEffect, useState } from "react";
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  createContext,
+} from "react";
 import "./App.css";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -7,21 +13,12 @@ import { Route, Routes } from "react-router";
 import { WatchList } from "./pages/WatchList";
 import { AllFilms } from "./pages/AllFilms";
 import { FilmDetails } from "./components/FilmDetails";
+import { optionsGet } from "./options/options";
 
 export interface Genre {
   id: number;
   name: string;
 }
-
-const TOKEN = import.meta.env.VITE_API_TOKEN;
-//useContext
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: `Bearer ${TOKEN}`,
-  },
-};
 
 function App() {
   const [genres, setGenres] = useState({});
@@ -36,7 +33,7 @@ function App() {
     useEffect(() => {
       fetch(
         "https://api.themoviedb.org/3/authentication/guest_session/new",
-        options,
+        optionsGet,
       )
         .then((res) => res.json())
         .then((res) => {
@@ -48,7 +45,10 @@ function App() {
     }, []);
 
   useEffect(() => {
-    fetch("https://api.themoviedb.org/3/genre/movie/list?language=en", options)
+    fetch(
+      "https://api.themoviedb.org/3/genre/movie/list?language=en",
+      optionsGet,
+    )
       // as - Type Assertion
       .then((res) => res.json() as Promise<{ genres: Genre[] }>)
       .then((res) => {

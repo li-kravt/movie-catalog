@@ -13,6 +13,7 @@ export const Header = ({ className }: HeaderProps) => {
         <span>MOVIESPACE</span>
       </div>
       <div className="buttons-header">
+        <div></div>
         <button className="button" children="ALL FILMS"></button>
         <Link
           to="/watchlist"

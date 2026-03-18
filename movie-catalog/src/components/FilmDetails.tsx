@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useParams } from "react-router";
 import { useState } from "react";
 import type { Genre } from "../App";
+import { optionsGet } from "../options/options";
 
 interface FilmDetailsData {
   adult: boolean;
@@ -24,23 +25,13 @@ interface FilmDetailsData {
   vote_average: number;
 }
 
-const TOKEN = import.meta.env.VITE_API_TOKEN;
-
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: `Bearer ${TOKEN}`,
-  },
-};
-
 export const FilmDetails = () => {
   const [filmDetailsData, setFilmDetailsData] =
     useState<FilmDetailsData | null>(null);
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
+    fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, optionsGet)
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
