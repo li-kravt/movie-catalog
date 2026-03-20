@@ -23,6 +23,15 @@ export interface Genre {
 function App() {
   const [genres, setGenres] = useState({});
 
+  //get token account
+  useEffect(() => {
+    fetch("https://api.themoviedb.org/3/authentication/token/new", optionsGet)
+      .then((res) => res.json())
+      .then((res) => console.log("token", res))
+      .catch((err) => console.error(err));
+  }, []);
+
+  //get session id and check
   const hasSessionId = () => {
     for (const oneCookie of document.cookie.split("; ")) {
       oneCookie.split("=")[1] === "guest_session_id" ? true : false;
@@ -44,12 +53,13 @@ function App() {
         .catch((err) => console.error(err));
     }, []);
 
+  //get the genre list
   useEffect(() => {
     fetch(
       "https://api.themoviedb.org/3/genre/movie/list?language=en",
       optionsGet,
     )
-      // as - Type Assertion
+      // ?as - Type Assertion
       .then((res) => res.json() as Promise<{ genres: Genre[] }>)
       .then((res) => {
         const newGenres = res.genres;
