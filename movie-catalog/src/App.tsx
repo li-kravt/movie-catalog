@@ -23,21 +23,14 @@ export interface Genre {
 function App() {
   const [genres, setGenres] = useState({});
 
-  //get token account
-  useEffect(() => {
-    fetch("https://api.themoviedb.org/3/authentication/token/new", optionsGet)
-      .then((res) => res.json())
-      .then((res) => console.log("token", res))
-      .catch((err) => console.error(err));
-  }, []);
-
-  //get session id and check
+  //check session id
   const hasSessionId = () => {
     for (const oneCookie of document.cookie.split("; ")) {
       oneCookie.split("=")[1] === "guest_session_id" ? true : false;
     }
   };
 
+  //get session id
   !hasSessionId &&
     useEffect(() => {
       fetch(
