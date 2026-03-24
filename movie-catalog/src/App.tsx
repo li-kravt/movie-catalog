@@ -22,15 +22,18 @@ export interface Genre {
 
 function App() {
   const [genres, setGenres] = useState({});
+  const [userSession, setUserSession] = useState<string>();
+  const [userToken, setUserToken] = useState<string>();
+  console.log("userSession", userSession);
 
-  //check session id
+  //check Guest session id
   const hasSessionId = () => {
     for (const oneCookie of document.cookie.split("; ")) {
       oneCookie.split("=")[1] === "guest_session_id" ? true : false;
     }
   };
 
-  //get session id
+  //get Guest session id
   !hasSessionId &&
     useEffect(() => {
       fetch(
@@ -74,7 +77,11 @@ function App() {
 
   return (
     <>
-      <Header className="header" />
+      <Header
+        setUserSession={setUserSession}
+        setUserToken={setUserToken}
+        className="header"
+      />
       <Routes>
         <Route index element={<MainPage genres={genres} />} />
         <Route path=":id" element={<FilmDetails />} />

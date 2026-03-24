@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Pagination } from "./Pagination";
 import { MovieCard } from "./MovieCard";
 import { Outlet } from "react-router";
-import { optionsPost } from "../options/options";
 
 interface MainPageProps {
   genres: Record<string, string>;
@@ -49,6 +48,8 @@ export const MainPage = ({ genres }: MainPageProps) => {
   }, [page]);
 
   console.log("totPages", totalPages);
+
+  console.log(popularFilms);
 
   return (
     <div className="main-page">

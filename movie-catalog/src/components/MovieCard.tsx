@@ -27,11 +27,8 @@ export const MovieCard = ({
     const movieGenre: string[] = genre_ids.map(
       (genreID) => (genres ?? [])[genreID],
     );
-    console.log("useEffect");
     setGenre(movieGenre);
   }, [genres]);
-
-  console.log("useEffect");
 
   return (
     <div className="movie-card">
