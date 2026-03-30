@@ -3,6 +3,12 @@ import { useParams } from "react-router";
 import { useState } from "react";
 import type { Genre } from "../App";
 import { optionsGet } from "../options/options";
+import { AccountIdContext } from "../context/userId";
+import { addToWatchList } from "../services/addToWatchList";
+
+type FilmDetailsProps = {
+  userSession: string;
+};
 
 interface FilmDetailsData {
   adult: boolean;
@@ -25,10 +31,11 @@ interface FilmDetailsData {
   vote_average: number;
 }
 
-export const FilmDetails = () => {
+export const FilmDetails = ({ userSession }: FilmDetailsProps) => {
   const [filmDetailsData, setFilmDetailsData] =
     useState<FilmDetailsData | null>(null);
   const { id } = useParams();
+  const accountId = useContext<number | null>(AccountIdContext);
 
   useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, optionsGet)
@@ -119,7 +126,10 @@ export const FilmDetails = () => {
               </div>
             </div>
             <div className="buttons">
-              <button className="button--border-unfull">
+              <button
+                onClick={() => addToWatchList(filmDetailsData.id, accountId)}
+                className="button--border-unfull"
+              >
                 Add to watchlist
               </button>
             </div>

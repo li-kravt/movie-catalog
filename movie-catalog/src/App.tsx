@@ -15,6 +15,7 @@ import { AllFilms } from "./pages/AllFilms";
 import { FilmDetails } from "./components/FilmDetails";
 import { optionsGet } from "./options/options";
 import { CheckAuth } from "./pages/CheckAuth";
+import { AccountIdContext } from "./context/userId";
 
 export interface Genre {
   id: number;
@@ -23,8 +24,10 @@ export interface Genre {
 
 function App() {
   const [genres, setGenres] = useState({});
-  const [userSession, setUserSession] = useState<string>();
+  const [userSession, setUserSession] = useState<string>("");
   const [userToken, setUserToken] = useState<string>();
+  const [accountId, setAccountId] = useState<number | null>(null);
+  console.log("userId", accountId);
   console.log("userSession", userSession);
 
   //check Guest session id
@@ -78,22 +81,35 @@ function App() {
 
   return (
     <>
-      <Header
-        setUserSession={setUserSession}
-        setUserToken={setUserToken}
-        className="header"
-      />
-      <Routes>
-        <Route index element={<MainPage genres={genres} />} />
-        <Route
-          path="check_auth"
-          element={<CheckAuth setUserSession={setUserSession} />}
+      <AccountIdContext value={accountId}>
+        <Header
+          setUserSession={setUserSession}
+          setUserToken={setUserToken}
+          className="header"
         />
-        <Route path=":id" element={<FilmDetails />} />
-        <Route path="watchlist" element={<WatchList />} />
-        <Route path="allfilms" element={<AllFilms />} />
-      </Routes>
-      <Footer />
+        <Routes>
+          <Route
+            index
+            element={<MainPage userSession={userSession} genres={genres} />}
+          />
+          <Route
+            path="check_auth"
+            element={
+              <CheckAuth
+                setUserSession={setUserSession}
+                setAccountId={setAccountId}
+              />
+            }
+          />
+          <Route
+            path=":id"
+            element={<FilmDetails userSession={userSession} />}
+          />
+          <Route path="watchlist" element={<WatchList />} />
+          <Route path="allfilms" element={<AllFilms />} />
+        </Routes>
+        <Footer />
+      </AccountIdContext>
     </>
   );
 }

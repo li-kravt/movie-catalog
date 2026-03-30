@@ -5,6 +5,7 @@ import { Outlet } from "react-router";
 
 interface MainPageProps {
   genres: Record<string, string>;
+  userSession: string;
 }
 
 interface Movie {

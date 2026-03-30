@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { TOKEN } from "../components/Header";
 import { useSearchParams, useNavigate } from "react-router";
+import { optionsGet } from "../options/options";
 
 type CheckAuth = {
   setUserSession: Function;
+  setAccountId: Function;
 };
 
-export const CheckAuth = ({ setUserSession }: CheckAuth) => {
+export const CheckAuth = ({ setUserSession, setAccountId }: CheckAuth) => {
   const [searchParams] = useSearchParams();
   const [isloading, setIsLoading] = useState<Boolean>(true);
   const [fetchResult, setFetchResult] = useState<String>("");
@@ -43,6 +45,13 @@ export const CheckAuth = ({ setUserSession }: CheckAuth) => {
           console.error(err);
           setFetchResult("Try again");
         });
+
+      fetch("https://api.themoviedb.org/3/account", optionsGet).then((res) =>
+        res.json().then((res) => {
+          console.log("account info", res);
+          setAccountId(res.id);
+        }),
+      );
     }
     setIsLoading(false);
     setFetchResult("denied");
