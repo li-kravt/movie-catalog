@@ -35,8 +35,10 @@ export const Header = ({
   return (
     <div className={className}>
       <div>
-        <img src="/img/logo.svg" alt="logo" />
-        <span>MOVIESPACE</span>
+        <Link to="/">
+          <img src="/img/logo.svg" alt="logo" />
+          <span>MOVIESPACE</span>
+        </Link>
       </div>
       <div className="buttons-header">
         <div></div>
