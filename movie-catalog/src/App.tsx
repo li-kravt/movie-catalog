@@ -14,6 +14,7 @@ import { WatchList } from "./pages/WatchList";
 import { AllFilms } from "./pages/AllFilms";
 import { FilmDetails } from "./components/FilmDetails";
 import { optionsGet } from "./options/options";
+import { CheckAuth } from "./pages/CheckAuth";
 
 export interface Genre {
   id: number;
@@ -84,6 +85,10 @@ function App() {
       />
       <Routes>
         <Route index element={<MainPage genres={genres} />} />
+        <Route
+          path="check_auth"
+          element={<CheckAuth setUserSession={setUserSession} />}
+        />
         <Route path=":id" element={<FilmDetails />} />
         <Route path="watchlist" element={<WatchList />} />
         <Route path="allfilms" element={<AllFilms />} />

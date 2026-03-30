@@ -4,7 +4,7 @@ import { optionsGet } from "../options/options";
 import { useSearchParams } from "react-router";
 import { Navigate } from "react-router";
 
-const TOKEN = import.meta.env.VITE_API_TOKEN;
+export const TOKEN = import.meta.env.VITE_API_TOKEN;
 
 type HeaderProps = {
   className?: string;
@@ -20,7 +20,7 @@ const handleClick = (setUserToken: Function) => {
     .then((res) => {
       console.log("token", res.request_token);
       window.open(
-        `https://www.themoviedb.org/authenticate/${res.request_token}?redirect_to=http://localhost:5177`,
+        `https://www.themoviedb.org/authenticate/${res.request_token}?redirect_to=http://localhost:5173/check_auth`,
       );
     })
     .catch((err) => console.error(err));
@@ -32,41 +32,6 @@ export const Header = ({
   setUserSession,
   setUserToken,
 }: HeaderProps) => {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-
-  useEffect(() => {
-    const approved = searchParams.get("approved");
-
-    if (approved === "true") {
-      const userToken = searchParams.get("request_token");
-
-      const optionsPost = {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "content-type": "application/json",
-          Authorization: `Bearer ${TOKEN}`,
-        },
-        body: JSON.stringify({
-          request_token: userToken,
-        }),
-      };
-
-      fetch(
-        "https://api.themoviedb.org/3/authentication/session/new",
-        optionsPost,
-      )
-        .then((res) => res.json())
-        .then((res) => {
-          console.log(res);
-          setUserSession(res.session_id);
-          navigate("/", { replace: true });
-        })
-        .catch((err) => console.error(err));
-    }
-  }, []);
-
   return (
     <div className={className}>
       <div>
