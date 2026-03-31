@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { optionsGet } from "../options/options";
 interface PaginationProps {
   setPage: (page: number) => void;
   page: number;
@@ -6,18 +7,11 @@ interface PaginationProps {
 }
 
 export const Pagination = ({ setPage, page }: PaginationProps) => {
-  const TOKEN = import.meta.env.VITE_API_TOKEN;
-
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${TOKEN}`,
-    },
-  };
-
   useEffect(() => {
-    fetch("https://api.themoviedb.org/3/movie/popular?language=en-US", options)
+    fetch(
+      "https://api.themoviedb.org/3/movie/popular?language=en-US",
+      optionsGet,
+    )
       .then((res) => res.json())
       .then((res) => console.log("pages", res.total_pages))
       .catch((err) => console.log(err));

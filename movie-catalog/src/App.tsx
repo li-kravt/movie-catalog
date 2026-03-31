@@ -16,6 +16,7 @@ import { FilmDetails } from "./components/FilmDetails";
 import { optionsGet } from "./options/options";
 import { CheckAuth } from "./pages/CheckAuth";
 import { AccountIdContext } from "./context/userId";
+import { GenresContext } from "./context/genres";
 
 export interface Genre {
   id: number;
@@ -32,9 +33,7 @@ function App() {
 
   //check Guest session id
   const hasSessionId = () => {
-    for (const oneCookie of document.cookie.split("; ")) {
-      oneCookie.split("=")[1] === "guest_session_id" ? true : false;
-    }
+    return document.cookie.includes("guest_session_id");
   };
 
   //get Guest session id
@@ -82,33 +81,35 @@ function App() {
   return (
     <>
       <AccountIdContext value={accountId}>
-        <Header
-          setUserSession={setUserSession}
-          setUserToken={setUserToken}
-          className="header"
-        />
-        <Routes>
-          <Route
-            index
-            element={<MainPage userSession={userSession} genres={genres} />}
+        <GenresContext value={genres}>
+          <Header
+            setUserSession={setUserSession}
+            setUserToken={setUserToken}
+            className="header"
           />
-          <Route
-            path="check_auth"
-            element={
-              <CheckAuth
-                setUserSession={setUserSession}
-                setAccountId={setAccountId}
-              />
-            }
-          />
-          <Route
-            path=":id"
-            element={<FilmDetails userSession={userSession} />}
-          />
-          <Route path="watchlist" element={<WatchList />} />
-          <Route path="allfilms" element={<AllFilms />} />
-        </Routes>
-        <Footer />
+          <Routes>
+            <Route
+              index
+              element={<MainPage userSession={userSession} genres={genres} />}
+            />
+            <Route
+              path="check_auth"
+              element={
+                <CheckAuth
+                  setUserSession={setUserSession}
+                  setAccountId={setAccountId}
+                />
+              }
+            />
+            <Route
+              path=":id"
+              element={<FilmDetails userSession={userSession} />}
+            />
+            <Route path="watchlist" element={<WatchList />} />
+            <Route path="allfilms" element={<AllFilms />} />
+          </Routes>
+          <Footer />
+        </GenresContext>
       </AccountIdContext>
     </>
   );

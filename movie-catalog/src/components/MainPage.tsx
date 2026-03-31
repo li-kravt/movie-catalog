@@ -2,20 +2,11 @@ import { useState, useEffect } from "react";
 import { Pagination } from "./Pagination";
 import { MovieCard } from "./MovieCard";
 import { Outlet } from "react-router";
+import type { Movie } from "../interface";
 
 interface MainPageProps {
   genres: Record<string, string>;
   userSession: string;
-}
-
-interface Movie {
-  id: number;
-  poster_path: string;
-  title: string;
-  genre_ids: number[];
-  vote_average: number;
-  overview: string;
-  // Add other properties you need from the API response
 }
 
 const TOKEN = import.meta.env.VITE_API_TOKEN;
@@ -34,10 +25,7 @@ export const MainPage = ({ genres }: MainPageProps) => {
   const [totalPages, setTotalPages] = useState<number>(0);
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`,
-      options,
-    )
+    fetch(`https://api.themoviedb.org/3/movie/popular`, options)
       .then((res) => res.json())
       .then((res) => {
         setPopularFilms(res.results);
